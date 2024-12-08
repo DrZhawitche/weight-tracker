@@ -1,3 +1,4 @@
+import './Input.scss'
 import { useEffect, useState } from "react"
 import { Line } from "react-chartjs-2"
 import {
@@ -84,25 +85,18 @@ function Input() {
     document.title = weight + ' lbs';
   }, [weight])
 
-  const targetMonth = '2024-11'
-
-  const filteredEntries = entries.filter(entry => entry.date.startsWith(targetMonth));
-
   const data = {
-    labels: filteredEntries.map(entry => entry.date),
+    labels: entries.map(entry => entry.date),
     datasets: [
       {
         label: 'Weight over time',
-        data: filteredEntries.map(entry => entry.weight),
+        data: entries.map(entry => entry.weight),
         fill: false,
         borderColor: 'rgb(75, 197, 192)', // Line color
         tension: 0.1,
       },
     ],
   };
-
-  // const [month, setMonth] = useState('01')
-
 
   const options = {
     responsive: true,
@@ -145,10 +139,6 @@ function Input() {
 
         <button type="submit">Add</button>
       </form>
-
-      <h3>New Entry details</h3>
-      <p>Date: {newEntry.date}</p>
-      <p>Weight: {newEntry.weight}</p>
 
       <h3>All weights</h3>
       <ul>
